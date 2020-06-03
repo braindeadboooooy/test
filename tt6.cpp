@@ -226,6 +226,11 @@ int main(int argc, char *argv[])
     string name_adding;
     string surname_adding;
     string middlename_adding;
+    
+    string surname_search;
+    string name_search;
+    string middlename_search;
+    
     int i=0;
     int j=0;
     int k=0;
@@ -405,7 +410,29 @@ int main(int argc, char *argv[])
         }
         break;
         case 7:
-        {
+        { 
+            cout << "Введите фамилию сотрудника: " << endl;
+            cin >> surname_search;
+            cout << "Введите имя сотрудника: " << endl;
+            cin >> name_search;
+            cout << "Введите отчество сотрудника: " << endl;
+            cin >> middlename_search;
+            int check = 0;
+            sotrudnik_information** mas_sotrudnik = mas_shop[i].Getmas_sotrudnik();
+            for (int i = 0; i < count_sotr; ++i){
+                if ((surname_search == (*mas_sotrudnik)[i].Getsotrudnik_surname()) && (name_search == (*mas_sotrudnik)[i].Getsotrudnik_name()) && (middlename_search == (*mas_sotrudnik)[i].Getsotrudnik_middlename())) {
+                    for (int j = i; j < count_sotr - 1; ++j) {
+                        (*mas_sotrudnik)[j].Getsotrudnik_surname() = (*mas_sotrudnik)[j + 1].Getsotrudnik_surname();
+                        (*mas_sotrudnik)[j].Getsotrudnik_name() = (*mas_sotrudnik)[j + 1].Getsotrudnik_name();
+                        (*mas_sotrudnik)[j].Getsotrudnik_middlename() = (*mas_sotrudnik)[j + 1].Getsotrudnik_middlename();
+                    }
+                count_sotr = count_sotr - 1;
+                check = check + 1;
+                }
+            }
+            if (check == 0) {
+                cout << "Сотрудник не найден!" << endl;
+            } 
         }
         break;
         }
